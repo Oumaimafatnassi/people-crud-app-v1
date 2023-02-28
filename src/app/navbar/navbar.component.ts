@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  imageUrl="assets/images/formalab-logo.png";
 }
