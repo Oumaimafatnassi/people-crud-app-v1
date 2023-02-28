@@ -1,0 +1,20 @@
+<div class="container">
+    <!--Interpolation-->
+    <p>Hello {{name}}</p>
+    <!--Property binding-->
+    <img [src]="imageUrl" alt="formalab-logo" width="100px">
+    <!--event binding-->
+    <button (click)="hello(name)" class="btn btn-info">Click</button>
+    <hr>
+    <!-- ngFor-->
+    <ul *ngFor="let bookname of booksList">
+        <li>{{bookname}}</li>
+    </ul>
+
+    <!-- ngIf , appraître ou disparaître une balise dans une condition donnée -->
+     <div *ngIf="myCondition">Simple text</div>
+
+     <div *ngIf="booksList.length==0" class="alert alert-warning">
+        no books found
+     </div>
+</div>
