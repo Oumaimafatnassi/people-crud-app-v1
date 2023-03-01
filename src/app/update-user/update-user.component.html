@@ -1,6 +1,13 @@
 <app-navbar></app-navbar>
-<div class="container my-5">
-    <form [formGroup] ="registerForm" (ngSubmit)="register()">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button [routerLink]="['/people-list']" class="btn btn-primary mt-4">Back</button>
+            <hr>
+            <h1 class="mt-5 mb-4">Update User</h1>
+        </div>
+    </div>
+    <form [formGroup] ="updateUserForm" (ngSubmit)="updateUser()">
         <div class="form-row">
             <div class="form-group col-6">
                 <label for="firstname">Firstname : </label>
@@ -23,17 +30,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-6">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
-                    <div *ngIf="email?.touched && email?.invalid">
-                        <small *ngIf="email?.errors?.['required']" class="text-danger">Email is required<br></small>
-                        <small *ngIf="email?.errors?.['email']" class="text-danger">Invalid email<br></small>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-6">
+            <div class="form-group col">
                 <label for="phone">Phone : </label>
                 <input type="text" name="phone" id="phone" formControlName="phone" class="form-control">
                 <div *ngIf="phone?.touched && phone?.invalid">
@@ -46,30 +43,8 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-6">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" formControlName="password">
-                <div *ngIf="password?.touched && password?.invalid">
-                    <small *ngIf="password?.errors?.['required']" class="text-danger">Password is required<br></small>
-                    <small *ngIf="password?.errors?.['minlength']" class="text-danger">password must contain 6 characters at least<br></small>
-                </div>
-            </div>
-
-            <div class="form-group col-6">
-                <label for="repassword">Repeat Password</label>
-                <input type="password" class="form-control" id="repassword" formControlName="repassword">
-                <div *ngIf="repassword?.touched && repassword?.invalid">
-                    <small *ngIf="repassword?.errors?.['required']" class="text-danger">Repeat password is required<br></small>
-                </div>
-                <div *ngIf="repassword?.valid && repassword?.value != password?.value" class="text-danger">
-                    the passwords entered do not match
-                </div>
-            </div>
-        </div>
-
-        <div class="form-row">
             <div class="form-group col">
-                <input type="submit" value="Register" [disabled]="registerForm.invalid || repassword?.value != password?.value" class="btn btn-info">
+                <input type="submit" value="Update User" [disabled]="updateUserForm.invalid" class="btn btn-warning">
             </div>
         </div>
     </form>

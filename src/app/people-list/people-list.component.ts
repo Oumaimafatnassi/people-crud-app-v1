@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-people-list',
@@ -7,32 +8,34 @@ import { Component } from '@angular/core';
 })
 export class PeopleListComponent {
 
-  peopleList=[
-    {
-      id: 1,
-      firstname:'Ayoub',
-      lastname:'Ghozzi',
-      phone:'00 216 85 129'
-    },
-    {
-      id:2,
-      firstname:'Oumaima',
-      lastname:'Fatnassi',
-      phone:'00 216 85 135'
-    },
-    {
-      id:3,
-      firstname:'May',
-      lastname:'Youta',
-      phone:'00 216 85 140'
-    }
-    
-     ]
+  peopleList:any[]=[]
+
+  constructor(private userService:UserService){}
+
+  ngOnInit(): void {
+    this.userService.getAllUser().subscribe(
+      result => {
+        this.peopleList=result
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
     
-     delete(peoples:any) {
-      let index = this.peopleList.indexOf(peoples)
+     delete(person:any) {
+      let index = this.peopleList.indexOf(person)
       this.peopleList.splice(index,1);
+
+      this.userService.deleteUser(person.id).subscribe(
+        res=>{
+          console.log(res);
+        },
+        err=>{
+          console.log(err);
+        }
+      )
      }
 
    

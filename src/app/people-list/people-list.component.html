@@ -1,30 +1,30 @@
 <app-navbar></app-navbar>
 <div class="container">
     <h1 class="mt-5 mb-4">People List</h1>
-    <button class="btn btn-primary">Add</button>
+    <button [routerLink]="['/add-user']" class="btn btn-primary">Add</button>
     <div *ngIf="peopleList.length==0" class="alert alert-warning mt-3">
         no people found
     </div>
-    <table class="table mt-3">
+    <table class="table mt-3" *ngIf="peopleList.length > 0">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Phone</th>
-                <th scope="col">#</th>
+                <th>#</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Phone</th>
+                <th>#</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let peoples of peopleList">
-                <th>{{peoples.id}}</th>
-                <td>{{peoples.firstname}}</td>
-                <td>{{peoples.lastname}}</td>
-                <td>{{peoples.phone}}</td>
+            <tr *ngFor="let person of peopleList ; let i = index">
+                <th>{{i}}</th>
+                <td>{{person.firstname}}</td>
+                <td>{{person.lastname}}</td>
+                <td>{{person.phone}}</td>
                 <td>
                     <button class="btn btn-info mr-2">Details</button>
-                    <button (click)="delete(peoples)" class="btn btn-danger mr-2">Delete</button>
-                    <button class="btn btn-warning">Update</button>
+                    <button (click)="delete(person)" class="btn btn-danger mr-2">Delete</button>
+                    <button class="btn btn-warning" [routerLink]="['/update-user']">Update</button>
                 </td>
             </tr>
 

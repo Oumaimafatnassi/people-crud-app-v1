@@ -1,25 +1,44 @@
 <div class="container">
-    <!--Interpolation-->
-    <p>Hello {{name}}</p>
-    <!--Property binding-->
-    <img [src]="imageUrl" alt="formalab-logo" width="100px">
-    <!--event binding-->
-    <button (click)="hello(name)" class="btn btn-info">Click</button>
-    <hr>
-    <!-- ngFor-->
-    <ul *ngFor="let bookname of booksList">
-        <li>{{bookname}}</li>
-    </ul>
+    <form [formGroup]="myForm" (ngSubmit)="saveUser()">
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="firstname"> Firstname :</label>
+                <input class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
+                <div *ngIf="firstname?.touched && firstname?.invalid">
+                    <small *ngIf="firstname?.errors?.['required']" class="text-danger">Firstname is required<br></small>
+                    <small *ngIf="firstname?.errors?.['pattern']" class="text-danger">Invalid Firstname<br></small>
+                    <small *ngIf="firstname?.errors?.['minlength']" class="text-danger">Firstname must contain two characters at least<br></small>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <input type="submit" value="Send" [disabled]="myForm.invalid" class="btn btn-primary">
+            </div>
+        </div>
 
-    <!-- ngIf , appraître ou disparaître une balise dans une condition donnée -->
-     <div *ngIf="myCondition">Simple text</div>
+    </form>
 
-     <div *ngIf="booksList.length==0" class="alert alert-warning">
-        no books found
-     </div>
-
-     <hr>
-     <ul *ngFor="let user of usersList">
-        <li>{{user.name}}</li>
-    </ul>
 </div>
+
+
+<!-- previous work -->
+<!-- 
+     -Interpolation <p>Hello {{name}}</p>
+     Property binding <img [src]="imageUrl" alt="formalab-logo" width="100px">
+     event binding <button (click)="hello(name)" class="btn btn-info">Click</button>
+     <hr> ngFor 
+     <ul *ngFor="let bookname of booksList">
+         <li>{{bookname}}</li>
+     </ul> ngIf , appraître ou disparaître une balise dans une condition donnée 
+      <div *ngIf="myCondition">Simple text</div>
+ 
+      <div *ngIf="booksList.length==0" class="alert alert-warning">
+         no books found
+      </div>
+ 
+      <hr>
+      <ul *ngFor="let user of usersList">
+         <li>{{user.firstname}}</li>
+     </ul>
+-->
